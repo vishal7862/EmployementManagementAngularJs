@@ -1,0 +1,170 @@
+﻿@model EmployementApplication.Models.LogInModel
+
+@{
+    ViewBag.Title = "Change Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1> Welcome @ViewBag.Name</h1>
+<h2>Settings</h2>
+
+<div>
+    <button class="btn btn-primary btn-lg" id="EditProfile" style="">
+        Edit Profile
+    </button>
+    <br />
+    <br/>
+
+    <button class="btn btn-primary btn-lg" id="ChangePsw" style="">
+        Change Password
+    </button>
+</div>
+
+<div>
+    <h3 id="Pass" style="display:none;color:red">Your password is changed @ViewBag.Name</h3>
+</div>
+<div id="dialogChangePassword" title="Change Password" style="text-align: left;display: none;">
+    <div id="err1"></div>
+    <div id="err2"></div>
+    <br/>
+    <div>
+        OldPassword:<input class="control-label" style="position: relative;left: 20px" type="password" id="OldPsw" />
+    </div>
+    <br />
+    <div>
+        New Password:<input class="control-label" style="position: relative;left: 20px" type="password" id="NewPsw" />
+    </div>
+    <br />
+
+    <div>
+        Confirm Password:<input class="control-label" style="position: relative;left: 20px" type="password" id="ConPsw" />
+    </div>
+    <br />
+
+    <div>
+        <input type="button" value="Change" class="btn btn-default" id="btn_save" onclick="ChangePsw()" />
+    </div>
+</div>
+
+<div id="dialogChangeProfile" title="Change Profile Details" style="text-align: left;display: none;">
+    @*<div id="err1"></div>*@
+    <br />
+    <div>
+      Name:<input class="control-label" style="position: relative;left: 20px" type="text" id="ProfileName" />
+    </div>
+    <br />
+   
+
+    <div>
+        <input type="button" value="Save" class="btn btn-default" id="btn_save" onclick="ChangeProfile()" />
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/js/Myscripts.js"></script>
+    <style type="text/css" media="screen">
+        .transparent {
+            display: none;
+        }
+    </style>
+<script>
+    function ChangePsw() {
+
+        var oldpsw=$("#OldPsw").val().trim();
+        var newpsw=$("#NewPsw").val().trim();
+        var conpsw = $("#ConPsw").val().trim();
+      
+        if (newpsw == conpsw) {
+            $.ajax({
+                url: "/Home/ChangePsw",
+                type: "POST",
+                data: { OldPassword: oldpsw, NewPassword: newpsw },
+                datatype: "json",
+                success: function (data) {
+                    var jsonObj = JSON.parse(data);
+                    if (jsonObj == "Pass") {
+                        $("#dialogChangePassword").dialog("close");
+                        $("#Pass").show();
+                    }
+                    if (jsonObj == "Please pass Correct Old Password") {
+                        $("#err1").text("Please pass Correct Old Password")
+                    }
+
+                
+
+                },
+                error: function (data) {
+
+                }
+
+            });
+        }
+
+        else{
+            $("#err2").text("New Password & Confirm Password didn't matched!")
+        }
+    }
+
+    function ChangeProfile() {
+  
+        var oldname = $("#ProfileName").val();
+      
+        $.ajax({
+            url: "/Home/ChangeProfile",
+            type: "POST",
+            data: { Name: oldname},
+            datatype: "json",
+            success: function (data) {
+                window.location.href = "/Home/Settings";
+            },
+            error: function (data) {
+
+            }
+
+        });
+    }
+
+    function ChangeProfileGet() {
+
+        //    var oldname = $("#ProfileName").val();
+
+        $.ajax({
+            url: "/Home/ChangeProfileGet",
+            type: "GET",
+
+            datatype: "json",
+            success: function (data) {
+                var jsonObj = JSON.parse(data);
+                $("#ProfileName").val(jsonObj.Name);
+                //var jsonObj = JSON.parse(data);
+                //if (jsonObj == "Please pass Correct Old Password") {
+                //    $("#err1").text("Please pass Correct Old Password")
+                //}
+            },
+            error: function (data) {
+
+            }
+
+        });
+    }
+</script>
+
+<script>
+
+
+
+    $("#ChangePsw").click(function () {
+
+        $("#dialogChangePassword").dialog("open");
+       
+
+    });
+    $("#EditProfile").click(function () {
+
+        $("#dialogChangeProfile").dialog("open");
+        ChangeProfileGet();
+
+    });
+
+</script>
+
+}

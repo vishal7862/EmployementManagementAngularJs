@@ -1,0 +1,20 @@
+﻿<div ng-controller="OwinController">
+    <form name="LoginForm">
+        <h1>Login</h1>
+        <div id="message" ng-show="errorChk">{{invalidMsg}}</div><br />
+        Email:<input required ng-pattern="emailPattern" name="Email" ng-model="user.Email" style="position:relative;left:27px" type="email" />
+
+
+        <div>
+            {{LoginForm.input.$valid}}
+        </div>
+        <br />
+        <br />
+        Password:<input required ng-model="user.Password" type="password" />
+        <br />
+        <br />
+        <p>
+            <button class="btn btn-default" type="submit" ng-click="Login(user,LoginForm)">LogIn</button>
+        </p>
+    </form>
+</div>

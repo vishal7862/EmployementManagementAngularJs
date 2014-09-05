@@ -1,0 +1,30 @@
+﻿<div ng-init="getAllDept()">
+  
+        <div ng-if="isShow==false">
+            <!--<div ng-init="transfer()"></div>-->
+            <h1>You are not authorized to view this page!</h1> 
+        </div>
+    <div ng-show="isShow">
+        <h1>Department</h1>
+        <button class="btn btn-primary btn-lg" id="OpenDialog" ng-click="open()">
+            Create New
+        </button>
+        <br />
+        <br />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>No of Employees</td>
+                <td>Action</td>
+            </tr>
+            <tr ng-repeat="dept in departments">
+                <td>{{dept.Id}}</td>
+                <td>{{dept.Name}}</td>
+                <td>{{dept.Total}}</td>
+                <td><a href="" ng-click="openEditDialog(dept.Id)">Edit</a>|<a href="#/DeleteDept/{{dept.Id}}">Delete</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>

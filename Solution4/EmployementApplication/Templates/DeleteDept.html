@@ -1,0 +1,16 @@
+﻿<div ng-init="getAllDept()">
+
+    <div ng-if="isShow==false">
+        <!--<div ng-init="transfer()"></div>-->
+        <h1>You are not authorized to view this page!</h1>
+    </div>
+    <div ng-show="isShow">
+
+        <h3>Delete Confirmation</h3>
+        <div>
+            Are you sure you want to delete the Department?
+            <br />
+            <button class="btn btn-default" ng-click="delete()">OK</button>
+        </div>
+    </div>
+</div>

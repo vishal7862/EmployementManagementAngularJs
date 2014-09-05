@@ -1,0 +1,22 @@
+﻿<div ng-init="getCurrEmp()">
+    <h2>Change Profile Details</h2>
+    <form name="ChngeProf">
+        <div id="dialogChangeProfile" title="Change Profile Details" style="text-align: left">
+
+            <br />
+            <div>
+                Name:<input class="control-label"  name="Name" required  style="position: relative;left: 20px" ng-model="currEmpData.Name" type="text" id="ProfileName" />
+                <span class="error" ng-show="ChngeProf.Name.$error.required" style="font-style:italic;color:grey;position:relative;left:40px">
+                    enter a name
+                </span>
+            </div>
+            
+            <br />
+
+
+            <div>
+                <input type="button" value="Save" class="btn btn-default" id="btn_save" ng-click="ChangeProfile(currEmpData,ChngeProf)" />
+            </div>
+        </div>
+    </form>
+</div>

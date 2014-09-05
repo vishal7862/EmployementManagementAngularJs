@@ -1,0 +1,24 @@
+﻿@model EmployementApplication.Models.RegisterModel
+
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<h2>Register</h2>
+<div id="Error"></div>
+@Html.ValidationSummary(false)
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+   
+    <p>
+        <button class="btn btn-default" type="submit">Register</button>
+    </p>
+    
+}
+
+ 
+   

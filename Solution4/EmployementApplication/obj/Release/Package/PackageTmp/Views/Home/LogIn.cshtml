@@ -1,0 +1,24 @@
+﻿@model EmployementApplication.Models.LogInModel
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<h2>Login</h2>
+<div id="Success"></div>
+
+@Html.ValidationSummary(false)
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+    <br/>
+    <p>
+        <button  class="btn btn-default" type="submit">LogIn</button>
+    </p>
+}
+
+
+

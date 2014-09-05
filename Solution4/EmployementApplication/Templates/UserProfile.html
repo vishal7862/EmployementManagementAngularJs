@@ -1,0 +1,18 @@
+﻿<div ng-init="getCurrEmp()">
+   
+    <div id="MainHead1">
+        <h2>Welcome to Employeement Management Portal </h2>
+        <p><h3>Details:</h3></p>
+        <p>Name:<span style="color:red">{{currEmpData.Name}}</span></p>
+        <p>Email:<span style="color:red">{{currEmpData.Email}}</span></p>
+        <p>
+            Departments:<div style="color:red">
+                <ul  ng-repeat="dept in currEmpData.DeptName">
+                    <li style="position:relative;left:20px">{{dept}}</li>
+                </ul>
+            </div>
+        </p>
+     
+    </div>
+
+</div>

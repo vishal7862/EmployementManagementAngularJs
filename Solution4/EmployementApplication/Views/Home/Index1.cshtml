@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Home</h2>
+
+<div id="MainHead1">
+    <p style="font-size:35px;position:relative;left:110px">Welcome to Employeement Management Portal </p>
+    <p><h3>Details:</h3></p>
+    <p>Name:<span style="color:red">@ViewBag.emp.Name</span></p>
+    <p>Email:<span style="color:red">@User.Identity.Name</span></p>
+    <p>Department:<span style="color:red">@ViewBag.dept</span></p>
+
+</div>
+

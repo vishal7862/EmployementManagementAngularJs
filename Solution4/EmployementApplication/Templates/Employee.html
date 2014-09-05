@@ -1,0 +1,41 @@
+﻿
+
+<div ng-init="getAllEmp()">
+    
+    <div ng-if="isShow==false">
+        <!--<div ng-init="transfer()"></div>-->
+        <h1>You are not authorized to view this page!</h1>
+    </div>
+    <div ng-show="isShow">
+        
+        <h1>Employees</h1>
+        <button class="btn btn-primary btn-lg" id="OpenDialog" ng-click="open()">
+            Create New
+        </button>
+        <br />
+        <br />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Email-Id</td>
+                <td>Email Confirmed</td>
+                <td>Department</td>
+                <td>Action</td>
+
+            </tr>
+            <tr ng-repeat="emp in employees">
+                <td>{{emp.Id}}</td>
+                <td>{{emp.Name}}</td>
+                <td>{{emp.Email}}</td>
+                <td>{{emp.EmailConfirmed}}</td>
+                <td><span ng-repeat="dept in emp.DeptName"><li>{{dept}}</li><span /></td>
+                <td><a href="" ng-click="editEmpDialog(emp.Id)">Edit</a>|<a href="#/Delete/{{emp.Id}}">Delete</a></td>
+            </tr>
+            <!--<tr ng-repeat="emp in employees">
+                <td>emp.Id</td>
+                <td>emp.Name</td>
+            </tr>-->
+        </table>
+    </div>
+</div>

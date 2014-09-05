@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+<!--PartialViewRegistration-->
+<div id="Partial"></div>
+<div id="Partial1"></div>
+<div id="Partial2"></div>
+<div id="Partial4"></div>
+<div class="jumbotron" id="MainDiv">
+    @if (!Request.IsAuthenticated)
+    {
+        <div id="MainHead1">
+            <p style="font-size:35px;color:red;position:relative;left:110px">Welcome to Employeement Management Portal</p>
+
+            <p>Feel free to navigate through employment and department section,create delete ,edit employees and departments!</p>
+
+            <p>Please register yourself to the portal so that you can enjoy our free services!!</p>
+        </div>
+
+
+    }
+    else
+    {
+     
+        <div id="MainHead">
+            <p style="font-size:35px;position:relative;left:110px">Welcome to Employeement Management Portal </p>
+            @*<p><h3>Details:</h3></p>
+            <p>Name:<span style="color:red">@ViewBag.emp.Name</span></p>
+            <p>Email:<span style="color:red">@User.Identity.Name</span></p>
+            <p>Department:<span style="color:red">@ViewBag.dept</span></p>*@
+
+        </div>
+     
+    
+
+        <button class="btn btn-primary btn-lg" id="OpenDialog" style="display: none">
+            Create New
+        </button>
+
+        <button class="btn btn-primary btn-lg" id="OpenDialog1" style="display: none">
+            Create New
+        </button>
+
+        <div id="Spinner" style="display:none;position: relative;right:135px;bottom:48px">
+            <img src="~/Images/spin.gif" />
+        </div>
+        <div>
+            <div id="EmpTitle" style="display: none;position:relative;left:385px;color:red;">Employee Section</div>
+            <table class="table" border="1" id="tblEmp" style="display: none">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Department</td>
+                    <td>Actions</td>
+                </tr>
+            </table>
+            <div id="DeptTitle" style="display: none;position:relative;left:385px;color:red">Department Section</div>
+            <table class="table" border="1" id="tblDept" style="display: none">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Actions</td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>
+
+<!--PopUp-->
+<div id="Popup" title="Error" style="text-align: left;display: none;">
+    <div id="chkk">
+        <p>Session has expired Please login again!</p>
+        <a href="#" id="Popuplink">Click here to login</a>
+    </div>
+</div>
+@if (Request.IsAuthenticated)
+    {
+<!---->
+<!--Dialogs of Employees-->
+<!--Dialog For Create -->
+<div id="dialog" title="Create" style="text-align: left;display: none;">
+    <div id="chkk">
+        <div>
+            Name:<input style="position:relative;left:49px" class="control-label" style="position: relative;left: 20px" type="text" id="Name" />
+        </div>
+        <br/>
+        <div>
+            Email:<input class="control-label" style="position: relative;left: 49px" type="text" id="Email" />
+        </div>
+        <br />
+        <div>
+            Password:<input class="control-label"  style="position: relative;left: 20px" type="password" id="Password" />
+        </div>
+        <br/>
+        <div>
+            ConfirmPassword:<input class="control-label" style="position: relative;left: 20px" type="password" id="Cpassword" />
+        </div>
+        <br/>
+        <div id="ChkBoxes">
+           Select Departments:
+            <br/>
+        </div>
+        <br />
+        <div id="Spinner1" style="display:none;position: relative;">
+            <img src="~/Images/spin.gif" />  Sending Email Wait...
+        </div>
+        <br/>
+        <div>
+            <input type="button" value="Create" class="btn btn-default" id="btn_save" onclick="EmpEntry()" />
+        </div>
+    </div>
+</div>
+<!--Dialog for Edit-->
+<div id="dialog1" title="Edit" style="text-align: left;display: none;">
+    <div>
+        Name:<input class="control-label" style="position: relative;left: 20px" type="text" id="Name1" />
+    </div>
+ 
+    <div id="EditId" style=""></div>
+    <br />
+    <br />
+    <div id="ChkBoxes1">
+        Select Departments:
+        <br />
+    </div>
+    <br />
+    <div>
+        <input type="button" value="Edit" class="btn btn-default" id="BtnEmpEdit" onclick="EmpEdit()" />
+    </div>
+</div>
+
+<!--Dialog for delete emp confirmation-->
+<div id="dialogDelConEmp" title="Confirmation" style="text-align: left;display: none;">
+
+    <div>
+        <p><b>Are you sure you want to delete </b><br /></p>
+        <p><span><b id="PempName">aslcnaslnca?</b></span></p>
+    </div>
+    <br />
+
+    <div id="EditDelId" style=""></div>
+    <br />
+    <div>
+        <input type="button" value="Delete" class="btn btn-default" id="btn_save" onclick="DelConfirmEmp()" />
+        <input type="button" value="Cancel" class="btn btn-default" id="btn_cancel" onclick="Close1()" />
+    </div>
+
+</div>
+
+<!--Dialogs of Departments-->
+<!--Dialog For Create -->
+<div id="dialog2" title="Create" style="text-align: left;display: none;">
+    <div>
+        Name:<input class="control-label" style="position: relative;left: 20px" type="text" id="DeptName" />
+    </div>
+    <br />
+    <div>
+        <input type="button" value="Create" class="btn btn-default" id="btn_save" onclick="DeptEntry()" />
+    </div>
+</div>
+
+<div id="dialog3" title="Edit" style="text-align: left;display: none;">
+    <div>
+        Name:<input class="control-label" style="position: relative;left: 20px" type="text" id="DeptName1" />
+    </div>
+    <div id="EditDeptId" style=""></div>
+    <br />
+    <div>
+        <input type="button" value="Edit" class="btn btn-default" id="btn_save" onclick="DeptEdit()" />
+    </div>
+</div>
+
+<!--Dialog for delete dept confirmation-->
+<div id="dialogDelConDept" title="Confirmation" style="text-align: left;display: none;">
+    <div>
+        <p><b>Are you sure you want to delete department </b><br /></p>
+        <p><span><b id="PdeptName">aslcnaslnca?</b></span></p>
+    </div>
+    <br />
+
+    <div id="EditDelDeptId" style=""></div>
+    <br />
+    <div>
+        <input type="button" value="Delete" class="btn btn-default" id="btn_save" onclick="DeleteDept()" />
+        <input type="button" value="Cancel" class="btn btn-default" id="btn_cancel1" onclick="Close()" />
+    </div>
+    
+</div>
+}
+
+@section scripts
+{
+<script src="~/js/Myscripts.js"></script>
+<style type="text/css" media="screen">
+    .transparent {
+        display: none;
+    }
+</style>
+
+}
+
+
+
+

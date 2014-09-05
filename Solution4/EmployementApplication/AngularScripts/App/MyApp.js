@@ -1,0 +1,1 @@
+﻿var app = angular.module('MyApp', ['ngResource', 'ngRoute', 'ui.bootstrap','ngCookies']);
